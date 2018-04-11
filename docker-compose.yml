@@ -1,0 +1,14 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/usr/src/app/
+    working_dir: /usr/src/app/
+    entrypoint: ["make", 'server-docker']
+    environment:
+      - APP_CONFIG_FILE=../config/development.py
+    ports:
+      - "5000:5000"

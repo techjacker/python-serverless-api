@@ -1,0 +1,10 @@
+autopep8
+flask
+flask-lambda-python36
+http-prompt
+pep8
+pre-commit
+psycopg2
+pytest
+pytest-cov
+requests

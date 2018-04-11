@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+set -e
+CURRENT_DIR=$PWD
+# shellcheck disable=SC1091
+. ./bin/lib/activate-env.sh
+sourceEnv
+
+# run infrastructure update
+cd terraform || exit 1
+if [[ ! -d .terraform ]]; then
+	terraform init
+fi
+if ! terraform workspace list 2>&1 | grep -qi "$ENVIRONMENT"; then
+	terraform workspace new "$ENVIRONMENT"
+fi
+terraform workspace select "$ENVIRONMENT"
+
+terraform plan -destroy \
+	-var "lambda_zip_path=$LAMBDA_ZIP_PATH" \
+	-var "region=$REGION" \
+	-var "account_id=$ACCOUNT_ID_AWS" \
+	-var "lambda_function_name=$LAMBDA_FUNCTION_NAME" \
+	-var "db_instance_type=$DB_INSTANCE_TYPE" \
+	-var "db_name=$DB_NAME" \
+	-var "db_user=$DB_USER" \
+	-var "db_pass=$DB_PASS" \
+	-var "trusted_cidrs=$TRUSTED_CIDRS"
+
+terraform destroy \
+	-auto-approve \
+	-var "lambda_zip_path=$LAMBDA_ZIP_PATH" \
+	-var "region=$REGION" \
+	-var "account_id=$ACCOUNT_ID_AWS" \
+	-var "lambda_function_name=$LAMBDA_FUNCTION_NAME" \
+	-var "db_instance_type=$DB_INSTANCE_TYPE" \
+	-var "db_name=$DB_NAME" \
+	-var "db_user=$DB_USER" \
+	-var "db_pass=$DB_PASS" \
+	-var "trusted_cidrs=$TRUSTED_CIDRS"
+
+cd "$CURRENT_DIR" || exit 1

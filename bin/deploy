@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -e
+# shellcheck disable=SC1091
+. ./bin/lib/activate-env.sh
+sourceEnv
+
+if [[ $SKIP_BUNDLE -ne 1 ]]; then
+	./bin/bundlelambda "$LAMBDA_ZIP"
+fi
+
+./bin/deployterraform
+
+./bin/pollapi

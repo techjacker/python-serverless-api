@@ -1,0 +1,33 @@
+sudo: required
+language: python
+env:
+  global:
+    - TERRAFORM_VERSION=0.11.6
+
+python:
+  - "3.6"
+
+addons:
+  apt:
+    sources:
+      - debian-sid
+    packages:
+      - shellcheck
+
+before_script:
+  - >
+      travis_retry curl
+      "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
+      > /tmp/terraform.zip
+  - sudo unzip /tmp/terraform.zip -d /usr/bin
+  - sudo chmod +x /usr/bin/terraform
+
+before_install:
+  - sudo apt-get update -yqq
+
+install:
+  - make deps
+
+script:
+  - make lint
+  - make test
