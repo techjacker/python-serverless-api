@@ -1,5 +1,6 @@
 autopep8
 flask
+# for python <= 3.5 use flask-lambda pacakge
 flask-lambda-python36
 http-prompt
 pep8

@@ -18,19 +18,37 @@ Deployment and application code adaptors are being added for the following:
 | Google Kubernetes Engine	| `gcloud` & `kubectl`  | 			 					 |
 
 
-| Platform       				| Adaptor					| Status						 |
+| Platform       				| Adaptor					| Code/Config				 |
 |--------------------------|-----------------------|:----------------------:|
-| AWS Lambda Python <= 3.6	| [Flask-Lambda](https://github.com/sivel/flask-lambda) | :heavy_check_mark: 	 |
-| AWS Lambda Python >= 3.6	| [Flask-Lambda-Python36](https://github.com/techjacker/flask-lambda) | :heavy_check_mark: 	 |
+| Local Development			| None				 		| [:floppy_disk:](run.py)	 	 																|
+| AWS Lambda Python >= 3.6	| [Flask-Lambda-Python36](https://github.com/techjacker/flask-lambda) | [:floppy_disk:](run_lambda.py)|
+| AWS Lambda Python <= 3.6	| [Flask-Lambda](https://github.com/sivel/flask-lambda) | [:floppy_disk:](run_lambda.py) 	 				|
 | Azure Functions				| 				 				| 					 			 |
 | Google Cloud Functions	| 				 				| 					 			 |
 
+-----------------------------------------------------------
+## Setup
+
+
+#### 1. Create `.env` file and update contents
+This is used to set the environment variables required for deployment and local development.
+```
+$ cp .env.example .env
+$ vim .env
+```
+
+#### 2. Create a virtualenv then install requirements:
+```
+$ make env
+$ source env/bin/activate
+$ make deps
+```
 
 -----------------------------------------------------------
 ## Example Usage
 
 #### 1. Set Environment
-Ensure you have the necessary environment variables set (see [setup instructions](#setup) above).
+Ensure you have created your virtualenv and have the necessary environment variables set (see [setup instructions](#setup) above).
 ```
 $ source env/bin/activate
 $ source .env
@@ -59,7 +77,7 @@ GET /artists
 ## AWS Lambda
 
 ### Terraform Deployment
-Ensure you have the necessary environment variables set (see [setup instructions](#setup) above).
+Ensure you have created your virtualenv and have the necessary environment variables set (see [setup instructions](#setup) above).
 
 ##### Setup
 Create terraform state bucket.
@@ -90,24 +108,6 @@ $ http-prompt $(cd terraform && terraform output api_url)
 GET artists
 ```
 
-
------------------------------------------------------------
-## Developer Setup
-Set the environment variables required for deployment and local development.
-
-#### 1. Create `.env` file needed for deployment and edit contents.
-```
-$ cp .env.example .env
-$ vim .env
-$ source .env
-```
-
-#### 2. Create a virtualenv then install requirements:
-```
-$ make env
-$ source env/bin/activate
-$ make deps
-```
 
 -----------------------------------------------------------
 ## Test
