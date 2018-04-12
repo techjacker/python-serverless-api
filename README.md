@@ -11,7 +11,7 @@ Deployment and application code adaptors are being added for the following:
 
 | Platform       				| Deployment				| Status						 |
 |--------------------------|-----------------------|:----------------------:|
-| AWS Lambda					| AWS SAM 					| 								 |
+| AWS Lambda					| AWS SAM 					| :heavy_check_mark:		 |
 | AWS Lambda					| Terraform 				| :heavy_check_mark: 	 |
 | Azure Functions				| Terraform 				| 					 			 |
 | Google Cloud Functions	| Terraform 				| 					 			 |
@@ -106,6 +106,35 @@ $ ./bin/deploy
 ```
 $ http-prompt $(cd terraform && terraform output api_url)
 GET artists
+```
+
+### [AWS Serverless Application Model (SAM)](https://aws.amazon.com/about-aws/whats-new/2016/11/introducing-the-aws-serverless-application-model/) Deployment
+
+Unlike Terraform SAM doesn't upload the zip bundle so do this using the `aws-cli` tool.
+```Shell
+$ aws s3 mb s3://<mybucket>
+$ aws s3 cp terraform/dist/python-serverless-api.zip s3://<mybucket>/python-serverless-api.zip
+```
+
+Update the S3 bucket value in the SAM config.
+```YAML
+# template.yaml
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: 'Boilerplate Python 3.6 Flask App.'
+Resources:
+  FlaskAPI:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      CodeUri: s3://<mybucket>/flask-app.zip
+```
+
+Deploy the SAM template with Cloudformation.
+```Shell
+$ aws cloudformation deploy \
+		--template-file template.yaml \
+		--stack-name python-serverless-stack-sam
+		--capabilities CAPABILITY_IAM
 ```
 
 

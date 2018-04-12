@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: 'Boilerplate Python 3.6 Flask App.'
+Resources:
+  FlaskAPI:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      CodeUri: s3://<mybucket>/flask-app.zip
+      Handler: run_lambda.http_server
+      Runtime: python3.6
+      Events:
+        HTTPRequest:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY

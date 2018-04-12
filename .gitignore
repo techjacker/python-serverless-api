@@ -1,6 +1,6 @@
 *.sublime-*
-
 .pytest_cache
+tmp.sh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
