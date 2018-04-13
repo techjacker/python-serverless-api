@@ -1,9 +1,6 @@
 from flask import Blueprint
 from flask import request, jsonify
 
-# from app.models import Artist, db
-# from .errors import unprocessable_entity, error_message
-# from .schemas import artist_schema
 from .errors import error_message
 
 api = Blueprint('api', __name__)
@@ -35,19 +32,6 @@ def handle_artists():
     handle_artists handles /artists route
     returns list of artists
     """
-    # if request.method == 'POST':
-    #     artist, errors = artist_schema.load(request.form, session=db.session)
-    #     if errors:
-    #         return unprocessable_entity(errors)
-
-    #     db.session.add(artist)
-    #     db.session.commit()
-
-    #     return jsonify(artist_schema.dump(artist).data)
-
-    # artists = Artist.query.order_by('id').items
-
-    # return jsonify(artist_schema.dump(artists, many=True).data)
     if request.method == 'POST':
         return 'ok'
 
