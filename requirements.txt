@@ -10,7 +10,7 @@ coverage==4.5.1
 Flask==0.12.2
 flask-lambda-python36==0.1.0
 http-prompt==0.11.2
-httpie==0.9.9
+httpie==1.0.3
 identify==1.0.10
 idna==2.6
 itsdangerous==0.24
