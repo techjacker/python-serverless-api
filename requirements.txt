@@ -7,10 +7,10 @@ cfgv==1.0.0
 chardet==3.0.4
 click==6.7
 coverage==4.5.1
-Flask==0.12.2
+Flask==1.0
 flask-lambda-python36==0.1.0
 http-prompt==0.11.2
-httpie==0.9.9
+httpie==1.0.3
 identify==1.0.10
 idna==2.6
 itsdangerous==0.24
@@ -29,10 +29,10 @@ pycodestyle==2.4.0
 Pygments==2.2.0
 pytest==3.5.0
 pytest-cov==2.5.1
-PyYAML==3.12
+PyYAML==5.1
 requests==2.20.0
 six==1.11.0
-urllib3==1.22
+urllib3==1.24.2
 virtualenv==15.2.0
 wcwidth==0.1.7
 Werkzeug==0.15.3
