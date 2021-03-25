@@ -29,7 +29,7 @@ pycodestyle==2.4.0
 Pygments==2.2.0
 pytest==3.5.0
 pytest-cov==2.5.1
-PyYAML==5.1
+PyYAML==5.4
 requests==2.20.0
 six==1.11.0
 urllib3==1.25.6
