@@ -24,7 +24,7 @@ pluggy==0.6.0
 pre-commit==1.8.2
 prompt-toolkit==1.0.15
 psycopg2==2.7.4
-py==1.5.3
+py==1.10.0
 pycodestyle==2.4.0
 Pygments==2.2.0
 pytest==3.5.0
